@@ -176,6 +176,7 @@ public static function  getDatos($filtro,$orden){
     $cadenaSQL="select*from plato ";
     if ($filtro!=null) $cadenaSQL.=" where ". $filtro;
     if ($orden!=null) $cadenaSQL.=" order by ". $orden;
+print_r($cadenaSQL);
     return ConectorBD::ejecutarQuery($cadenaSQL, NULL);
 }
 

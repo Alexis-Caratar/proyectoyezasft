@@ -9,11 +9,44 @@
 require_once dirname(__FILE__). '/../../Clases/ConectorBD.php';
 require_once dirname(__FILE__). '/../../Clases/Plato.php';
 
-$datos= Plato::getDatosObjetos(" tipo='P'", 'idplato');
+$filtro="";
+if (isset($_POST['nombre'])&&$_POST['nombre']!=NULL){
+    $nombresmenu=$_POST['nombre'];
+    $filtro=" and  concat(nombre,idplato) like'%$nombresmenu%'";  
+}
+if (isset($_POST['tiempopreparacion'])&&$_POST['tiempopreparacion']!=NULL){
+    $tiempopreparacion=$_POST['tiempopreparacion'];
+    $filtro=" and  tiempopreparacion like'$tiempopreparacion%'";  
+}
+if (isset($_POST['valor'])&&$_POST['valor']!=NULL){
+    $valor=$_POST['valor'];
+    $filtro=" and  valor like'$valor%'";  
+}
+
+//buscar por menus
+//$cadenasql="select idmenu, nombre from menu";
+//$datosmenus= ConectorBD::ejecutarQuery($cadenasql, null);
+//$optionmenus="";
+//if (count($datosmenus)>0){
+//    for ($j = 0; $j < count($datosmenus); $j++) {
+//    $optionmenus.="<option value='{$datosmenus[$j][0]}'>{$datosmenus[$j][1]}</option>";
+//    
+//    }  
+//}else{
+//$optionmenus="<option>No hay</option>";    
+//}
+
+
+
+ 
+
+$datos= Plato::getDatosObjetos(" tipo='P' $filtro", 'idplato');
 $listaplato='';
 $numero=1;
+if (count($datos)>0){
 for ($i = 0; $i < count($datos); $i++) {
     $datoplato= $datos[$i];
+    $datosmenusoption[$i][0]=$datoplato->getNombreMenus()->getNombre();
 
     $listaplato.='<tr>';
     $listaplato.="<td>$numero</td>";
@@ -28,8 +61,67 @@ for ($i = 0; $i < count($datos); $i++) {
     $listaplato.='</tr>';
     $numero+=1;
 }
-?>
+}else{
+    $listaplato.="<tr><td>No hay platos registrados</td></tr>";
+}
 
+
+?>
+<div class="container-fluid" >
+    <div class="offset-8 col-4  "style="z-index: 100; position: absolute;background: #333333;">
+                <form method="post" class="">
+                    <table class="table table-dark table-hover " >
+                       <tr> 
+                        <th> <img src="presentacion/imagenes/buscarpequeño.png"></span></th><td><input  class="form-control" type="text"  autofocus name="nombre" placeholder="Nombre Plato o Codigo" ></td>                                               <td><input class="btn btn-primary"type="submit" value="BUSCAR"></td>
+                        </tr>
+                    </table>
+                </form>
+        <a style='cursor: pointer;color: white;' onClick="muestra_oculta('contenido1')" title="BUSQUEDA AVANZADA" class="btn-dark offset-5"><img src="presentacion/imagenes/lista.png"width="20" height="15"> Busqueda Avanzada </a>
+             <!--busqueda avanzada-->
+             <div class="contenido1" id="contenido1">
+                <form method="post">
+                   <table class="table-hover"style="color:white; ">
+                        <tr>
+                           <td>
+                               <div class="input-group-text"> <span class="input-group-text">Menu</span>
+                                   <select class="input-group-text" name="menus">
+                                       <?=$optionmenus?>
+                                   </select>    
+                              </div>
+                            </td>
+                        </tr>
+                        <table>
+                </form>
+                 <form method="post">
+                     <table>
+                        <tr>
+                            <td>
+                               <div class="input-group-text"><span class="input-group-text">Valor</span>
+                                   <input type="number" name="valor"class="form-control">
+                               </div>
+                            </td>
+                        </tr>
+                      </table>
+                 </form>
+                 <form method="post">
+                     <table>
+                        <tr>
+                           <td>
+                                <div class="input-group-text"><span class="input-group-text">Tiempo Preparacion</span>
+                                    <input type="number" name="tiempopreparacion"class="form-control">
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                     <input class="btn btn-primary" type="submit"  value="Buscar">
+                </form>
+              <br>
+             
+
+            </div>
+    </div> 
+  
+ </div>
 <style>
     h2.alert-primary{
         padding: 10px;
@@ -55,5 +147,14 @@ function Eliminar(id){
         location='PrincipalAdmin.php?CONTENIDOADMIN=Configuracion/Platos/actualizarplato.php&accion=Eliminar&idplato='+id;
 
 }
+  function muestra_oculta(id){
+     if (document.getElementById){ 
+       var el = document.getElementById(id); 
+        el.style.display = (el.style.display == 'none') ? 'block' : 'none'; 
+     }
+        }
+        window.onload = function(){
+        muestra_oculta('contenido1');
+   }
 
 </script>

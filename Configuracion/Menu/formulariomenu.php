@@ -29,16 +29,17 @@ else  $menu=new Menu(null, null);
 </style>
 <div class="container-fluid">
 <h2><?= strtoupper($accion)?> MENU </h2>
-<form  name="formulariomenu" method="POST" action="PrincipalAdmin.php?CONTENIDOADMIN=Configuracion/Menu/actualizarmenu.php">
-    
-    
-    <table  >
-        <div class="form-group ">
-            <tr><th>Nombre</th><th><input type="text" class="form-control input-lg" name="nombre" value="<?=$menu->getNombre()?>"placeholder="ingrese nombre"  autofocus required maxlength="80"></th></tr>
-            </div> 
-    <input    type="hidden" name="idmenu" value="<?=$menu->getIdmenu()?>">
+<form  name="formulariomenu" method="POST"
+       action="PrincipalAdmin.php?CONTENIDOADMIN=Configuracion/Menu/actualizarmenu.php">
+    <table>
+      <tr><th>Nombre</th>
+          <th><input type="text" class="form-control input-lg"
+             accept=""name="nombre" value="<?=$menu->getNombre()?>"
+              placeholder="ingrese nombre"  autofocus required maxlength="80">
+          </th>
+      </tr>
     </table>
-    <input class="btn btn-primary " type="submit"  name="accion"value="<?=$accion?>">
-
+   <input    type="hidden" name="idmenu" value="<?=$menu->getIdmenu()?>">
+   <input class="btn btn-primary " type="submit"  name="accion"value="<?=$accion?>">
 </form>
 </div>
