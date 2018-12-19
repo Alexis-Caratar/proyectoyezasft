@@ -8,52 +8,15 @@
 require_once dirname(__FILE__). '/../../Clases/ConectorBD.php';
 require_once dirname(__FILE__).'/../../Clases/Mesa.php';
 
-
-$cadenaSQL="select idmesa,area,color,mesainicial,piso from comanda,mesa where idmesa=mesa and estado<>'' group by idmesa  ";
-$datos1= ConectorBD::ejecutarQuery($cadenaSQL, null);
-//print_r($datos1[1][3]."-");
-
-
-
-
-$cadena="SELECT * FROM mesa WHERE mesainicial NOT IN (";
-$coma=",";
-for ($p = 0; $p < count($datos1); $p++) {
-   // print_r($datos1[$p][3]);
-    $cadena.=" {$datos1[$p][3]}$coma";
-   
-// $datos2= ConectorBD::ejecutarQuery($cadenaSQL, null); 
+$filtro="";
+if (isset($_POST['nombre'])&&$_POST['nombre']!=NULL){
+    $nombresmenu=$_POST['nombre'];
+    $filtro=" concat(area,mesainicial) like'%$nombresmenu%'";            
 }
-$cadena.="0)";
-print_r($cadena);
 
-    
-//    for ($k = 0; $k < count($datos2); $k++) {
-//        //echo 'mesas totales   ';
-//        // print_r($datos2[$k][0]);
-//        for ($j = 0; $j < count($datos1); $j++) {
-//            if ($datos1[$j][3]==$datos2[$k][0]){
-//                print_r($datos1[$j][3]);
-//        
-//                //ocupadas
-//            } 
-//            }
-//                 
-//                //print_r($datos1[$j][4]."--");
-//      //  echo 'mesas ocupadas   ';
-//      //  print_r($datos1[$j][4]);
-//            
-//        }
-        
-
-
-
-
-
-
-
-$datos=Mesa::getDatosEnObjeto(null, 'idmesa');
+$datos=Mesa::getDatosEnObjeto($filtro, 'idmesa');
 $listadoMesa='';
+if (count($datos)>0){
 for ($i=0; $i< count($datos);$i++){
     $datosMesa=$datos[$i];
     $listadoMesa.='<tr>';
@@ -66,26 +29,34 @@ for ($i=0; $i< count($datos);$i++){
     $listadoMesa.='</tr>';
     
 }
+  }else {
+$listadoMesa.="<td class='text-primary'>No se encontraron resultado para su criterio de busqueda. </td>";    
+}
 ?>
-<table border="2">
-    
-     
-   
-</table>
+
+<div class="offset-8 col-md-4  "style="z-index: 100;  margin: 0% 65%; position: absolute;background: #333333;">
+    <form method="post" class="">
+     <table class="table-responsive-lg table table-dark table-hover " >
+          <tr>
+              <th> <img src="presentacion/imagenes/buscarpequeño.png"></span></th><td><input  class="form-control" type="text"  autofocus name="nombre" placeholder="Area o Mesa" ></td>
+              <td><input class="btn-primary"type="submit" value="BUSCAR"></td>
+         </tr>
+       </table>
+ </form>
+</div>
 
 <div class="container">
     <br>
-<H2 class="alert-primary text-center">Gestionar Mesas</H2>
+    <H2 >MESAS</H2>
 <br>
-
-<table class="tabla container">
-    <thead  class="table-dark">
-            <th>AREA</th><th>COLOR</th><th>MESA INICIAL</th><tH>PISO</tH>
-         
-            <th><a href="PrincipalAdmin.php?CONTENIDOADMIN=Configuracion/Mesa/formularioMesa.php&accion=Adicionar"><img src="Presentacion/imagenes/Adicionar.png" title="Adicionar"></a></th></thead>
-        <?=$listadoMesa?>
+    <table class="tabla container table-hover table table-responsive-lg">
+        <thead class="table-dark">
+                <th>AREA</th><th>COLOR</th><th>MESA </th><th>PISO</th>
+                <th><a href="PrincipalAdmin.php?CONTENIDOADMIN=Configuracion/Mesa/formularioMesa.php&accion=Adicionar"><img src="Presentacion/imagenes/Adicionar.png" title="Adicionar"></a></th>
+        </thead>
+            <?=$listadoMesa?>
     </table>
-
+</div>
 <script type="text/javascript">
     function Eliminar(id){
         if(confirm("Confirmar Eliminacion"))

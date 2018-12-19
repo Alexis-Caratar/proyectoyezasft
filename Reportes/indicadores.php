@@ -21,7 +21,6 @@ if (isset($año)&&$año!=NULL) {
 $year = date("Y");
 }
 $lista = "";
-
 for ($j = 1; $j <= 12; $j++) {
     $cadenaSQL = "select SUM(base)as base from caja WHERE fecha BETWEEN '$year-$j-01' AND '$year-$j-31' ";
     $datos = ConectorBD::ejecutarQuery($cadenaSQL, null);
@@ -89,33 +88,31 @@ for ($j = 1; $j <= 12; $j++) {
     </head>
 
     <body>
-        <div class="text-center">
-            <H2 class="text-center" style="font-weight: bold; font-size: 50px;">REPORTES</H2><br>
-        <div class="col-3 offset-4">
-        <form name="formulario" method="post" action="#">
-            
-                    <td><input class="form-control" type="number" name="año" placeholder="Año"  >
-             
-             <input class=" btn btn-primary" type="submit" value="Buscar">
-        </form>
-       </div>
-        </div>
-        
-        <div class="container-fluid row">
-            
-        <div class="col-7"><div id="chartdiv" style="width: 100%; height: 500px; margin: 20% 0%;"></div>
-        </div> 
-        <div class="col-5" >
-           
-            <H2 class="alert-primary text-center">VENTAS DEL AÑO <?=$year?></H2>
-           
-
-            <table class="table table-hover tab-content">
-                <thead  class="table-dark"><th>FECHA</th><th>GASTO</th></thead>
-            <?= $lista ?>
-            </table>
-        </div>
+          <div class="offset-8 col-md-4  "style="z-index: 100;  margin: 0% 65%; position: absolute;background: #333333;">
+            <form method="post" class="">
+             <table class="table-responsive-lg table table-dark table-hover " >
+                  <tr>
+                      <th> <img src="presentacion/imagenes/buscarpequeño.png"></span></th><td><input  class="form-control" type="text"  autofocus name="año" placeholder="AÑO" ></td>
+                      <td><input class="btn-primary"type="submit" value="BUSCAR"></td>
+                 </tr>
+               </table>
+         </form>
             </div>
+        
+        <div class="container-fluid"><br>
+            <h2>INDICADOR</h2>
+            <div class="container-fluid row">    
+                <div class="col-7"><div id="chartdiv" style="width: 100%; height: 500px; margin: 20% 0%;"></div>
+                </div> 
+                <div class="col-5" >
+                    <H2>VENTAS DEL AÑO <?=$year?></H2>
+                    <table class="table table-hover table-responsive-lg">
+                        <thead  class="table-dark"><th>FECHA</th><th>GASTO</th></thead>
+                    <?= $lista ?>
+                    </table>
+                </div>
+             </div>
+        </div>
     </body>
 
 </html>

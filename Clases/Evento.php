@@ -93,7 +93,7 @@ class Evento {
       public static function  getDatos($filtro, $orden){
           $cadenaSQL="select *from evento";
           if($filtro!=NULL) $cadenaSQL.=" where $filtro";
-          if($orden!=NULL) $cadenaSQL.=" order by $orden";
+          if($orden!=NULL) $cadenaSQL.=" order by $orden desc";
           return ConectorBD::ejecutarQuery($cadenaSQL, null);
       }
       public static function getDatosEnObjetos($filtro, $orden){

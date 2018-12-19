@@ -20,6 +20,7 @@ if (isset($_POST['nombre'])&&$_POST['nombre']!=NULL){
 $datos= Menu::getDatosObjetos($filtro, 'idmenu');
 $listaMenus='';
 $numero=1;
+if (count($datos)>0){
 for ($i = 0; $i < count($datos); $i++) {
     $datomenu= $datos[$i];
     
@@ -34,54 +35,35 @@ for ($i = 0; $i < count($datos); $i++) {
     $listaMenus.='</tr>';
     $numero+=1;   
 }
+} else {
+$listaMenus.="<td class='text-primary'>No se encontraron resultado para su criterio de busqueda. </td>";    
+}
 ?>
-<div class="container-fluid" >
-<div class="offset-8 col-4  "style="z-index: 100; position: absolute;background: #333333;">
+
+<div class="offset-8 col-md-4  "style="z-index: 100;  margin: 0% 65%; position: absolute;background: #333333;">
     <form method="post" class="">
-
-
-                     <table class="table table-dark table-hover " >
-                               <tr> 
-                                   <th> <img src="presentacion/imagenes/buscarpequeño.png"></span></th><td><input  class="form-control" type="text"  autofocus name="nombre" placeholder="Nombre menu" ></td>
-                                   <td><input class="btn btn-primary"type="submit" value="BUSCAR"></td>
-                                </tr>
-                           </table>
+     <table class="table-responsive-lg table table-dark table-hover " >
+          <tr>
+              <th> <img src="presentacion/imagenes/buscarpequeño.png"></span></th><td><input  class="form-control" type="text"  autofocus name="nombre" placeholder="Nombre menu" ></td>
+              <td><input class="btn-primary"type="submit" value="BUSCAR"></td>
+         </tr>
+       </table>
  </form>
-     
-      
-  
 </div>
-</div> 
+ 
 
-
-
-
-
-
-
-
-
-<style>
-    h2.alert-primary{
-        padding: 10px;
-        font-family: TeamViewer;
-    }
-</style>
 <div class="container">
-    <br>
-<H2 class="alert-primary text-center">Gestionar Menu</H2>
-<br>
-
-<table class="tabla container">
-    <thead  class="table-dark "><th>NUMERO</th><th>NOMBRE DE LA CATEGORIA</th>
-    <th><a href="PrincipalAdmin.php?CONTENIDOADMIN=Configuracion/Menu/
-           formulariomenu.php&accion=Adicionar">
-            <img src="Presentacion/imagenes/Adicionar.png" title="Adicionar">
-        </a></th>
-</thead>
-    <?= $listaMenus?>
-</table>
-    </div>
+    <br><br>
+    <H2 >MENU</H2><!--titulos principal-->
+        <table class="tabla container  table-hover table-responsive-lg">
+            <thead  class="table-dark "><th>NUMERO</th><th>NOMBRE DE LA CATEGORIA</th>
+                <th><a href="PrincipalAdmin.php?CONTENIDOADMIN=Configuracion/Menu/formulariomenu.php&accion=Adicionar">
+                    <img src="Presentacion/imagenes/Adicionar.png" title="Adicionar"></a>
+                </th>
+            </thead>
+            <?= $listaMenus ?>
+        </table>
+</div>
 
 <script type="text/javascript">
 function Eliminar(id){

@@ -26,21 +26,18 @@ else $clavenueva='';
 
 if (isset($_GET['confirmarclave'])) $confirmarclave=$_GET['confirmarclave'];
 else $confirmarclave='';
-
-
-
-
 ?>
 <div class="container col-md-5"><br>
-    <h3 class="text-center">CAMBIO DE CONTRASEÑA </h3>
-<form name="formulario" action="PrincipalAdmin.php?CONTENIDOADMIN=Empresa/actualizarClave.php&usuario=<?=$usuario?>"method="post">
-    <table class="table table-hover">
-    <font color="red" face="arial"><?= $mensaje?>
-    <tr><th>Contraseña Actual</th><th><input class="form-control" type="text" name="claveactual" placeholder="Ingrese contraseña actual" required autofocus value="<?= $claveactual?>"> </th></tr>
-    <tr><th>Contraseña nueva</th><th><input  class="form-control"type="text" name="clavenueva" placeholder="Ingrese contraseña nueva" required  value="<?= $clavenueva?>"> </th></tr>
-    <tr><th>Confirmar contraseña</th><th><input class="form-control" type="text" name="confirmarclave" placeholder="repita la contraseña actual" value="<?= $confirmarclave?>"required > </th></tr>
-   </table>
-    <center><input class=" btn btn-primary"type="submit" value="Confirmar"></center>
+        <h2>CAMBIO DE CONTRASEÑA </h2>
+    <form name="formulario" action="PrincipalAdmin.php?CONTENIDOADMIN=Empresa/actualizarClave.php&usuario=<?=$usuario?>"method="post">
+        <table class="table table-hover table-responsive-lg table-content ">
+        <font color="red" face="arial"><?= $mensaje?>
+        <tr><th>Contraseña Actual</th><th><input class="form-control" type="text" name="claveactual" placeholder="Ingrese contraseña actual" required autofocus value="<?= $claveactual?>"> </th></tr>
+        <tr><th>Contraseña nueva</th><th><input  class="form-control"type="text" name="clavenueva" placeholder="Ingrese contraseña nueva" required  value="<?= $clavenueva?>"> </th></tr>
+        <tr><th>Confirmar contraseña</th><th><input class="form-control" type="text" name="confirmarclave" placeholder="repita la contraseña actual" value="<?= $confirmarclave?>"required > </th></tr>
+        <tr><td></td><td> <input class=" btn btn-primary"type="submit" value="Confirmar"></td></tr>
+        </table>
+       
 
-</form>
+    </form>
 </div>

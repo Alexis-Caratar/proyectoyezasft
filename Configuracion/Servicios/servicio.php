@@ -8,10 +8,17 @@
 
 require_once dirname(__FILE__). '/../../Clases/ConectorBD.php';
 require_once dirname(__FILE__). '/../../Clases/Plato.php';
+$filtro="";
+if (isset($_POST['nombre'])&&$_POST['nombre']!=NULL){
+    $nombreservicio=$_POST['nombre'];
+    $filtro=" and nombre like'%$nombreservicio%'"; 
+            
+}
 
-$datos= Plato::getDatosObjetos(" tipo='S' ", 'idplato');
+$datos= Plato::getDatosObjetos(" tipo='S' $filtro ", 'idplato');
 $listaplatos='';
 $numero=1;
+if (count($datos)>0){
 for ($i = 0; $i < count($datos); $i++) {
     $datoplato= $datos[$i];
     
@@ -25,27 +32,31 @@ for ($i = 0; $i < count($datos); $i++) {
     $listaplatos.='</tr>';
     $numero+=1;
 }
-
+}else{
+    $listaplatos.="<td>No se encontraron resultado por su criterio de busqueda. </td>";
+}
 
 
 ?>
-<style>
-    h2.alert-primary{
-        padding: 10px;
-        font-family:  TeamViewer;
-    }
-</style>
-<div class="container"><br>
-    <H2 class="alert-primary text-center">GESTIONAR SERVICIO</H2>
+<div class="offset-8 col-md-4  "style="z-index: 100;  margin: 0% 65%; position: absolute;background: #333333;">
+    <form method="post" class="">
+     <table class="table-responsive-lg table table-dark table-hover " >
+          <tr>
+              <th> <img src="presentacion/imagenes/buscarpequeño.png"></span></th><td><input  class="form-control" type="text"  autofocus name="nombre" placeholder="Nombre Servicio" ></td>
+              <td><input class="btn-primary"type="submit" value="BUSCAR"></td>
+         </tr>
+       </table>
+ </form>
+</div>
 
-    <table class="table ">
-        <thead class="table-dark "><th>Numero</th><th>Nombre</th><th>Valor</th> <th>Descripcion</th><th>Foto</th>
-<th><a href="PrincipalAdmin.php?CONTENIDOADMIN=Configuracion/Servicios/formularioservicio.php&accion=Adicionar"><img src="Presentacion/imagenes/Adicionar.png" title="Adicionar"></a></th>
-    </thead>
- 
-    
-    <?= $listaplatos?>
-</table>
+<div class="container"><br>
+    <H2 >SERVICIOS</H2>
+    <table class="table table-responsive-lg table-hover ">
+          <thead class="table-dark "><th>Numero</th><th>Nombre</th><th>Valor</th> <th>Descripcion</th><th>Foto</th>
+                <th><a href="PrincipalAdmin.php?CONTENIDOADMIN=Configuracion/Servicios/formularioservicio.php&accion=Adicionar"><img src="Presentacion/imagenes/Adicionar.png" title="Adicionar"></a></th>
+          </thead>
+        <?= $listaplatos?>
+    </table>
    
 
 </div>

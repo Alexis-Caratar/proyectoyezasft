@@ -137,18 +137,18 @@ for ($i = 0; $i < count($datos); $i++) {
 
 
 ?>
-<div class="offset-8 col-4  "style="z-index: 100; position: absolute;background: #333333;">
+<div class="offset-8 col-md-4  "style="z-index: 100;  margin: 0% 65%; position: absolute;background: #333333;">
     <form method="post" class="">
-
-
-                     <table class="table table-dark table-hover " >
-                               <tr> 
-                                   <th> <img src="presentacion/imagenes/buscarpequeño.png"></span></th><td><input  class="form-control" type="text"  autofocus name="nombre" placeholder="Identificacion" ></td>
-                                   <td><input class="btn btn-primary"type="submit" value="BUSCAR"></td>
-                                </tr>
-                           </table>
+     <table class="table-responsive-lg table table-dark table-hover " >
+          <tr>
+              <th> <img src="presentacion/imagenes/buscarpequeño.png"></span></th><td><input  class="form-control" type="text"  autofocus name="nombre" placeholder="Identificacion o Nombre" ></td>
+              <td><input class="btn-primary"type="submit" value="BUSCAR"></td>
+         </tr>
+       </table>
  </form>
-     
+
+ 
+
       
   <a style='cursor: pointer;color: white;' onClick="muestra_oculta('contenido1')" title="BUSQUEDA AVANZADA" class="btn-dark offset-5"><img src="presentacion/imagenes/lista.png"width="20" height="15"> Busqueda Avanzada </a>
   
@@ -229,9 +229,9 @@ for ($i = 0; $i < count($datos); $i++) {
 </div> 
  <br>
  
-<H2 class="text-center" style="font-weight:bold;font-size: 50px;">RESERVAS</H2>
-   <div class="container-fluid row">
-     <table class="table table-hover  ">
+<H2 >RESERVAS</H2>
+   <div class="container-fluid ">
+     <table class="table table-hover  table-responsive-lg ">
         <thead  class="table-dark">
                     <th>N°</th><th>Identificaion</th><th>Cliente</th><th>Evento</th><th>Fecha Registro</th><th colspan="2">Fecha Reserva</th><th>Personas</th><th>Direccion</th><th>Total</th><th>Abono</th><th>Saldo</th><th>Estado</th>
                     <th><a href="PrincipalAdmin.php?CONTENIDOADMIN=ReservasAdmin/ReservasFormulario.php&accion=Adicionar"><img src="Presentacion/imagenes/Adicionar.png" title="Adicionar"></a></th> 

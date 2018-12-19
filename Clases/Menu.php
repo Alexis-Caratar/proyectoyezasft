@@ -72,7 +72,7 @@ class Menu {
 public static function  getDatos($filtro,$orden){
     $cadenaSQL="select idmenu,nombre from menu ";
     if ($filtro!=null) $cadenaSQL.=" where ". $filtro;
-    if ($orden!=null) $cadenaSQL.=" order by ". $orden;
+    if ($orden!=null) $cadenaSQL.=" order by ". $orden." desc";
     return ConectorBD::ejecutarQuery($cadenaSQL, NULL);
 }
 

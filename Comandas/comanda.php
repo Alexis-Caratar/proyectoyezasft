@@ -47,9 +47,9 @@ if (isset($_POST['AFechas'])) {
 
 
 ;
-if (isset($_POST['nombre'])!=null&isset($_POST['nombre']))  {
+if ($_POST['nombre']!=null&isset($_POST['nombre']))  {
    $identificacion=$_POST['nombre'];
-   $filtro= " where usuariocaja='$identificacion'";
+   $filtro= " idempleado LIKE '$identificacion%' and ";
 
 }
  
@@ -79,14 +79,8 @@ if ($usuariorol=='admin'|| $usuariorol=='cajero'){
 
 //crear variable para los datos
 $datos= Comandas::getDatosEnObjeto($filtro,' idcomanda asc');
-if (count($datos)==NULL){
-    $mennsajecomanda="<H2>NO HAY COMANDAS REGISTRADAS EN EL SISTEMA</H2>";
-    
-}
-
 $listadoComanda='';
-//recorremos los datos
-
+if (count($datos)>0){
 for ($i = 0; $i < count($datos); $i++) {
     //crear nueva variable
     $datosComanda=$datos[$i];
@@ -178,19 +172,19 @@ elseif ($_SESSION['rol']=='cocina') {
         
     }
     }
-   
+} else {
+    $listadoComanda.="<td class='text-primary'>No se encontraron resultado para su criterio de busqueda. </td>";
+}
 ?>
-<div class="container">
-    <div class="offset-7 col-4  "style="z-index: 100; position: absolute;background: #333333;">
-    <form method="post" class="">
 
-
-                     <table class="table table-dark table-hover " >
-                               <tr> 
-                                   <th> <img src="presentacion/imagenes/buscarpequeño.png"></span></th><td><input  class="form-control" type="text"  autofocus name="nombre" placeholder="Identificacion" ></td>
-                                   <td><input class="btn btn-primary"type="submit" value="BUSCAR"></td>
-                                </tr>
-                           </table>
+   <div class="offset-8 col-md-4  "style="z-index: 100;  margin: 0% 65%; position: absolute;background: #333333;">
+    <form method="post">
+     <table class="table-responsive-lg table table-dark table-hover " >
+          <tr>
+              <th> <img src="presentacion/imagenes/buscarpequeño.png"></span></th><td><input  class="form-control" type="text"  autofocus name="nombre" placeholder="Identificacion o nombre  " ></td>
+              <td><input class="btn-primary"type="submit" value="BUSCAR"></td>
+         </tr>
+       </table>
  </form>
   <a style='cursor: pointer;color: white;' onClick="muestra_oculta('contenido1')" title="BUSQUEDA AVANZADA" class="btn-dark offset-5"><img src="presentacion/imagenes/lista.png"width="20" height="15"> Busqueda Avanzada </a>
   
@@ -257,11 +251,12 @@ elseif ($_SESSION['rol']=='cocina') {
     
   <?=$menu?>
     
-    <H2 class="alert-primary text-center" style="font-weight: bold;font-size: 50px;">COMANDAS</H2>
+    <H2 >COMANDAS</H2>
+<br>
 <br>
 
 <table class="table container table-hover">
-    <thead  class="table-dark">
+    <thead  class="table-dark table-responsive-lg">
             <th>Numero</th><th>Empleado</th><th>mesa</th><th>Fecha</th><th>Estado</th><th>factura</th>
             <form method="post" action="PrincipalAdmin.php?CONTENIDOADMIN=Comandas/comandaActualizar.php&idcaja=<?=$idcaja?>">
                 <th></th> <th>    <input type="hidden" name="accion" value="Adicionar">

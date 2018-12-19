@@ -39,17 +39,13 @@ if (isset($_POST['AFechas'])) {
 }
 
 
-;
-if (isset($_POST['nombre'])!=null&isset($_POST['nombre']))  {
+
+if (isset($_POST['nombre'])&&$_POST['nombre']!="")  {
    $identificacion=$_POST['nombre'];
    $filtro= " where usuariocaja='$identificacion'";
-
 }
 
-
-
-$cadenasql="select idcaja,fecha,base,gasto,usuariocaja,fechasalida  from caja $filtro ";
-print_r($cadenasql);
+$cadenasql="select idcaja,fecha,base,gasto,usuariocaja,fechasalida  from caja $filtro order by fecha desc ";
 $datos= ConectorBD::ejecutarQuery($cadenasql, NULL);
 $lista="";
 $numero=1;
@@ -82,22 +78,20 @@ if (count($datos)>0){
    } 
     }
 } else {
-    $lista.="<h5>No tiene registros de cada del dia de hoy</h5>";
+    $lista.="<td class='text-primary'>No se encontraron resultado para su criterio de busqueda. </td>";   
 }
+?>
 
-?><div class="container-fluid" >
-<div class="offset-8 col-4  "style="z-index: 100; position: absolute;background: #333333;">
-    <form method="post" class="">
-
-
-                     <table class="table table-dark table-hover " >
-                               <tr> 
-                                   <th> <img src="presentacion/imagenes/buscarpequeño.png"></span></th><td><input  class="form-control" type="text"  autofocus name="nombre" placeholder="Identificacion" ></td>
-                                   <td><input class="btn btn-primary"type="submit" value="BUSCAR"></td>
-                                </tr>
-                           </table>
+<div class="offset-8 col-md-4  "style="z-index: 100;  margin: 0% 65%; position: absolute;background: #333333;">
+    <form method="post">
+     <table class="table-responsive-lg table table-dark table-hover " >
+          <tr>
+              <th> <img src="presentacion/imagenes/buscarpequeño.png"></span></th><td><input  class="form-control" type="text"  autofocus name="nombre" placeholder="Identificacion o nombre  " ></td>
+              <td><input class="btn-primary"type="submit" value="BUSCAR"></td>
+         </tr>
+       </table>
  </form>
-     
+
       
   <a style='cursor: pointer;color: white;' onClick="muestra_oculta('contenido1')" title="BUSQUEDA AVANZADA" class="btn-dark offset-5"><img src="presentacion/imagenes/lista.png"width="20" height="15"> Busqueda Avanzada </a>
   
@@ -162,10 +156,10 @@ if (count($datos)>0){
 <br>
 
  
-    <H2 class="text-center" style="font-weight: bold; font-size: 50px;">CAJA</H2>
+<H2>CAJA</H2><br><br>
     
-    <table class="table table-hover">
-        <tr>
+    <table class="table table-hover table-responsive-lg">
+        <tr class="thead-dark">
             <th>Numero</th><th>CAJA ABIERTA</th><th>CAJA CERRADA</th><th>BASE</th><th>GASTO</th><th>USUARIO</th>
         <th><a href="PrincipalAdmin.php?CONTENIDOADMIN=Comandas/formulariocaja.php&accion=Adicionar"><img src="Presentacion/imagenes/Adicionar.png" title="Adicionar" height=""></a></th>
         </tr>

@@ -120,6 +120,15 @@ else{ //cajero despues de haber abierto caja
         <link href="boostrap/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="Presentacion/css/style.css" rel="stylesheet" type="text/css"/>
         <script src="lib/jquery-3.3.1.min.js" type="text/javascript"></script> 
+        <style>
+            h2{
+    font-family: serif;
+    font-weight: bolder;
+    font-size: 40px;
+    color: #000;
+}
+        </style>
+    </head>
     <body> 
         <!-- estas imagenes son para las redes sociales puro banner-->
         <div style="background: url(presentacion/imagenes/banneryeza0000.jpg); width: 100%; height: 100px; background-size: 100% 100%"> 
@@ -129,12 +138,17 @@ else{ //cajero despues de haber abierto caja
                 <li><a>Acerca de?</a></li>
             </div>
         </div>
-        <div class="menu">
-
-<?= $menu ?>
+        <div class="menu ">
+          
+                <?= $menu ?>
+          
         </div>
 
-        <div class="contenido"><?php include $_GET['CONTENIDOADMIN'] ?></div>
+        <div class="contenido table-responsive-lg">
+          
+                    <?php include $_GET['CONTENIDOADMIN'] ?>
+                  
+        </div>
     </body>
 </html>
 

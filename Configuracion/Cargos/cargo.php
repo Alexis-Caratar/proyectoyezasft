@@ -8,10 +8,17 @@
 
 require_once dirname(__FILE__). '/../../Clases/ConectorBD.php';
 require_once dirname(__FILE__). '/../../Clases/Cargo.php';
+$filtro="";
+if (isset($_POST['nombre'])&&$_POST['nombre']!=NULL){
+    $nombrescargo=$_POST['nombre'];
+    $filtro="nombre like'%$nombrescargo%'"; 
+            
+}
 
-$datos= Cargo::getDatosObjetos(null, 'idcargo');
+$datos= Cargo::getDatosObjetos($filtro, 'idcargo');
 $listaCargos='';
 $numero=1;
+if (count($datos)>0){
 for ($i = 0; $i < count($datos); $i++) {
     $datocargo= $datos[$i];
     
@@ -23,27 +30,31 @@ for ($i = 0; $i < count($datos); $i++) {
     $listaCargos.='</tr>';
     $numero+=1;
 }
+}else{
+    $listaCargos.="<td class='text-primary'>No se encontraron resultado para su criterio de busqueda. </td>";
+}
 ?>
-<style>
-    h2.alert-primary{
-        padding: 10px;
-        font-family:font-family;
+<div class="offset-8 col-md-4  "style="z-index: 100;  margin: 0% 65%; position: absolute;background: #333333;">
+    <form method="post" class="">
+     <table class="table-responsive-lg table table-dark table-hover " >
+          <tr>
+              <th> <img src="presentacion/imagenes/buscarpequeño.png"></span></th><td><input  class="form-control" type="text"  autofocus name="nombre" placeholder="Nombre Cargo" ></td>
+              <td><input class="btn-primary"type="submit" value="BUSCAR"></td>
+         </tr>
+       </table>
+ </form>
+</div>
 
-    }
-</style>
 <div class="container">
     <br>
-    <H2 class="alert-primary text-center" >Gestionar Cargos</H2>
-    <table class="tabla container ">
-        
-        <thead class="table-dark"><th>NUMERO</th><th>NOMBRE</th><th>SUELDO</th>
-        <th><a href="PrincipalAdmin.php?CONTENIDOADMIN=Configuracion/Cargos/formulariocargo.php&accion=Adicionar"><img src="Presentacion/imagenes/Adicionar.png" title="Adicionar"></a></th>
-    </thead>
- 
-    
-    <?= $listaCargos?>
-</table>
-    </div>
+    <H2 >CARGOS</H2>
+       <table class="tabla container  table-hover table-responsive-lg">
+            <thead class="table-dark"><th>NUMERO</th><th>NOMBRE</th><th>SUELDO</th>
+                <th><a href="PrincipalAdmin.php?CONTENIDOADMIN=Configuracion/Cargos/formulariocargo.php&accion=Adicionar"><img src="Presentacion/imagenes/Adicionar.png" title="Adicionar"></a></th>
+            </thead>
+            <?= $listaCargos?>
+        </table>
+ </div>
 
 <script type="text/javascript">
 function Eliminar(id){

@@ -99,7 +99,7 @@ $datos12= ConectorBD::ejecutarQuery($cadena, null);
 
 
         
-        <div class="form-control container-fluid"><br>
+        <div class="table-responsive-lg container-fluid"><br>
         <footer style="background-color: #057E94;color: white; font-family: arial; font-size: 30px; "><br>
             
             <div class="row container-fluid">

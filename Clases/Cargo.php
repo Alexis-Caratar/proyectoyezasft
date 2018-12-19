@@ -75,7 +75,7 @@ class Cargo {
 public static function  getDatos($filtro,$orden){
     $cadenaSQL="select*from cargo ";
     if ($filtro!=null) $cadenaSQL.=" where ". $filtro;
-    if ($orden!=null) $cadenaSQL.=" order by ". $orden;
+    if ($orden!=null) $cadenaSQL.=" order by ". $orden." desc";
     return ConectorBD::ejecutarQuery($cadenaSQL, NULL);
 }
 

@@ -62,17 +62,16 @@ for ($i = 0; $i < count($datos); $i++) {
     $numero+=1;
 }
 }else{
-    $listaplato.="<tr><td>No hay platos registrados</td></tr>";
+    $listaplato.="<td class='text-primary'>No se encontraron resultado para su criterio de busqueda. </td>";
 }
 
 
 ?>
-<div class="container-fluid" >
-    <div class="offset-8 col-4  "style="z-index: 100; position: absolute;background: #333333;">
-                <form method="post" class="">
-                    <table class="table table-dark table-hover " >
+<div class="container-fluid ">
+  <div class="offset-8 col-md-4   "style="z-index: 100;  margin: 0% 65%; position: absolute;background: #333333;">              <form method="post" >
+                    <table class="table-responsive-lg   table-dark table-hover" >
                        <tr> 
-                        <th> <img src="presentacion/imagenes/buscarpequeño.png"></span></th><td><input  class="form-control" type="text"  autofocus name="nombre" placeholder="Nombre Plato o Codigo" ></td>                                               <td><input class="btn btn-primary"type="submit" value="BUSCAR"></td>
+                            <th> <img src="presentacion/imagenes/buscarpequeño.png"></span></th><td><input  class="form-control" type="text"  autofocus name="nombre" placeholder="Nombre Plato o Codigo" ></td>                                               <td><input class="btn btn-primary"type="submit" value="BUSCAR"></td>
                         </tr>
                     </table>
                 </form>
@@ -120,27 +119,26 @@ for ($i = 0; $i < count($datos); $i++) {
 
             </div>
     </div> 
+     </div>
+      
   
- </div>
-<style>
-    h2.alert-primary{
-        padding: 10px;
-        font-family:  TeamViewer;
-    }
-</style>
-<div class="container-fluid"><br>
-    <H2 class="alert-primary text-center">Gestionar Platos</H2>
-<center>
-    
-    <table class="table">
-        <thead class="table-dark"> 
+
+
+<div class="container-fluid  "><br><br>
+    <H2 > PLATOS</H2>
+
+    <div class="container-fluid">
+    <table class="table table-responsive-lg  table-hover  small">
+        <thead class="table-dark "> 
         <th>Numero</th><th>Codigo</th><th>Nombre</th><th>Descripcion</th><th>Valor</th><th>Tiempo Preparacion</th><th>Menu</th><th>Foto</th>      
      <th><a href="PrincipalAdmin.php?CONTENIDOADMIN=Configuracion/Platos/formularioplato.php&accion=Adicionar"><img src="Presentacion/imagenes/Adicionar.png" title="Adicionar"></a></th>
         </thead>
     <?= $listaplato?>
 </table>
+   </div>
 
 </div>
+
 <script type="text/javascript">
 function Eliminar(id){
     if (confirm("Confirmar Eliminación"+id)) 

@@ -64,9 +64,6 @@ if ($_SESSION['rol']=='cajero') {
     
 //}
 $datos = Domicilio::getDatosEnObjetos($filtro, 'iddomicilio');
-
-
-
 $lista = '';
 $p='P';
 $R='R';
@@ -99,7 +96,7 @@ for ($i = 0; $i < count($datos); $i++) {
         $color="style='background-color: #81F781'";
         $eliminar="";
         $modificar="";
-        $estados="LISTO EN COCINA";
+        $estados="LISTO ";
     }elseif($estado=='E'){
         $color="style='background-color: #64FE2E'";
         $eliminar="";
@@ -113,9 +110,6 @@ for ($i = 0; $i < count($datos); $i++) {
         $modificar="";
         $estados="PAGADO";
     }
-    
-    
-    
     $lista .= "<tr $color>";
     $lista .= "<td>{$item}</td><td>{$cliente->getIdentificacioCliente()}</td><td>{$cliente->getNombresCompletos()}</td><td>{$cliente->getFechasistema()}</td><td colspan='2'>{$cliente->getFechaYHora()}</td><td>{$cliente->getDireccionYBario()}</td><td>{$cliente->getTotal()}</td><td>{$cliente->getAbono()}</td><td>{$cliente->getSaldos()}</td><td>$estados</td>";
     $lista .= "<td>$modificar$eliminar<a href='PrincipalAdmin.php?CONTENIDOADMIN=DomiciliosaAdmin/DetalleDomicilio.php&iddomicilio={$cliente->getIddomicilio()}&identificacioncliente={$cliente->getIdentificacion()}&accion=Modificar'><img src='Presentacion/imagenes/enviar.png' title='Detalle'></a></td>";
@@ -123,83 +117,79 @@ for ($i = 0; $i < count($datos); $i++) {
 }
 
     }else{
-         $lista = "<td style='color:red;'> No Se Encontraron Resultados</h2>";
+        $lista.="<td class='text-primary'>No se encontraron resultado para su criterio de busqueda. </td>";  
     }
-
-
 ?>
-
-<div class="container-fluid" >
-<div class="offset-8 col-4  "style="z-index: 100; position: absolute;background: #333333;">
+<div class="offset-8 col-md-4  "style="z-index: 100;  margin: 0% 65%; position: absolute;background: #333333;">
     <form method="post" class="">
-
-
-                     <table class="table table-dark table-hover " >
-                               <tr> 
-                                   <th> <img src="presentacion/imagenes/buscarpequeño.png"></span></th><td><input  class="form-control" type="text"  autofocus name="nombre" placeholder="Identificacion" ></td>
-                                   <td><input class="btn btn-primary"type="submit" value="BUSCAR"></td>
-                                </tr>
-                           </table>
+     <table class="table-responsive-lg table table-dark table-hover " >
+          <tr>
+              <th> <img src="presentacion/imagenes/buscarpequeño.png"></span></th><td><input  class="form-control" type="text"  autofocus name="nombre" placeholder="Identificacion o Nombre" ></td>
+              <td><input class="btn-primary"type="submit" value="BUSCAR"></td>
+         </tr>
+       </table>
  </form>
-     
+
+ 
+
       
   <a style='cursor: pointer;color: white;' onClick="muestra_oculta('contenido1')" title="BUSQUEDA AVANZADA" class="btn-dark offset-5"><img src="presentacion/imagenes/lista.png"width="20" height="15"> Busqueda Avanzada </a>
   
  <!--busqueda avanzada-->
 
 <div class="contenido1" id="contenido1">
-    <form method="post">
-        <div id="ColosTitulos">
-            <center>
-                <table class="table-hover"style="color:white; ">
-                <tr>
-                    <td><h6><input type="checkbox" id="check" name="AFecha" <?= $AFecha ?>class="input-group"><label for='check'>Registro</label></h6></td>   
-                </tr>
-                <tr>
-                    <td>
-                        <div class="input-group-text">
-                            <span class="input-group-text">inicio(*)</span>   
-                        <input type="date" name="BFechaInicio" value="<?= $VFechaInicio ?>" class="form-control"></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="input-group-text">
-                        <span class="input-group-text">fin(*)</span><input type="date" name="BFechaFin" value="<?= $VFechaFin ?> "class="form-control"></div>
-                    </td>
-                </tr>
-                <tr>
-                <td><h6><input type="checkbox" id="check2" name="AFechas" <?= $AFechas ?>class="input-group"><label for='check2'>Reserva</label></h6></td>
-                </tr>
-                <tr> 
-                    <td>
-                        <div class="input-group-text">
-                            <span class="input-group-text">inicio(*)</span><input type="date" name="BFechaInicios" value="<?= $VFechaInicios ?>"class="form-control"></div>
-                    </td>
-                </tr>
-                <tr>
+        <form method="post">
+            <div id="ColosTitulos">
+                <center>
+                    <table class="table-hover"style="color:white; ">
+                    <tr>
+                        <td><h6><input type="checkbox" id="check" name="AFecha" <?= $AFecha ?>class="input-group"><label for='check'>Registro</label></h6></td>   
+                    </tr>
+                    <tr>
                         <td>
                             <div class="input-group-text">
-                            <span class="input-group-text">fin(*)</span><input type="date" name="BFechaFins" value="<?= $VFechaFins ?>"class="form-control"></div>
+                                <span class="input-group-text">inicio(*)</span>   
+                            <input type="date" name="BFechaInicio" value="<?= $VFechaInicio ?>" class="form-control"></div>
                         </td>
-                     </tr>
-                     <tr>
-                     <table>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="input-group-text">
+                            <span class="input-group-text">fin(*)</span><input type="date" name="BFechaFin" value="<?= $VFechaFin ?> "class="form-control"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                    <td><h6><input type="checkbox" id="check2" name="AFechas" <?= $AFechas ?>class="input-group"><label for='check2'>Reserva</label></h6></td>
+                    </tr>
+                    <tr> 
+                        <td>
+                            <div class="input-group-text">
+                                <span class="input-group-text">inicio(*)</span><input type="date" name="BFechaInicios" value="<?= $VFechaInicios ?>"class="form-control"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                            <td>
+                                <div class="input-group-text">
+                                <span class="input-group-text">fin(*)</span><input type="date" name="BFechaFins" value="<?= $VFechaFins ?>"class="form-control"></div>
+                            </td>
+                         </tr>
                          <tr>
-                            
-                         <td>
-                         <th>
-                             <div class="col-md-4 col-md-offset-4">
-                                 <a class="btn-primary" href='#' onClick="document.forms[0].action = '';document.forms[0].submit();">BUSCAR</a>
-                    </div>
-                         </th>
-                         </td>
-                         </tr>
-                     </table>
-                         </tr>
-                </table>
-             </form>
-</div>
+                         <table>
+                             <tr>
+
+                             <td>
+                             <th>
+                                 <div class="col-md-4 col-md-offset-4">
+                                     <a class="btn-primary" href='#' onClick="document.forms[0].action = '';document.forms[0].submit();">BUSCAR</a>
+                        </div>
+                             </th>
+                             </td>
+                             </tr>
+                         </table>
+                             </tr>
+                    </table>
+                 </form>
+    </div>
 </div> 
   
  </div>
@@ -212,7 +202,7 @@ for ($i = 0; $i < count($datos); $i++) {
         </div>
      
       <div  id="contenido" >
-          <table class="table-content"style="color: white">
+          <table class="table-content table-responsive"style="color: white">
             <tr><td>PENDIENTE</td><td><input type="color" value="#F5A9A9" disabled></td><tr>
             <tr><td>VISTO EN COCINA</td><td><input type="color" value="#A9F5F2" disabled></td><tr>
             <tr><td>LISTO EN COCINA</td><td><input type="color" value="#81F781" disabled></td><tr>
@@ -224,15 +214,17 @@ for ($i = 0; $i < count($datos); $i++) {
  </div>
     <br>
     <br>
-    <H2 class="text-center" style="font-weight:bold;font-size: 50px;">DOMICILIOS</H2>
-<table class="tabla container-fluid">
-        <thead  class="table-dark">
+    <H2 >DOMICILIOS</H2>
+    
+ 
+    <table class="tabla container-fluid  table-responsive-lg">
+            <thead  class="table-dark">
 
-                    <th>Numero</th><th>Identificaion</th><th>Cliente</th><th>Fecha Registro</th><th colspan="2">Fecha Domicilio</th><th>Direccion</th><th>Total</th><th>Abono</th><th>Saldo</th><th>Estado</th>
-                    <th><a href="PrincipalAdmin.php?CONTENIDOADMIN=DomiciliosaAdmin/DomiciliosFormulario.php&accion=Adicionar"><img src="Presentacion/imagenes/Adicionar.png" title="Adicionar"/></a></th>
-          </thead>
-    <?= $lista ?>
-   </table>
+                        <th>Numero</th><th>Identificaion</th><th>Cliente</th><th>Fecha Registro</th><th colspan="2">Fecha Domicilio</th><th>Direccion</th><th>Total</th><th>Abono</th><th>Saldo</th><th>Estado</th>
+                        <th><a href="PrincipalAdmin.php?CONTENIDOADMIN=DomiciliosaAdmin/DomiciliosFormulario.php&accion=Adicionar"><img src="Presentacion/imagenes/Adicionar.png" title="Adicionar"/></a></th>
+              </thead>
+        <?= $lista ?>
+       </table>
 
 <script type="text/javascript">
     function Eliminar(id) {
