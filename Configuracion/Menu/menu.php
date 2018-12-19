@@ -39,7 +39,6 @@ for ($i = 0; $i < count($datos); $i++) {
 $listaMenus.="<td class='text-primary'>No se encontraron resultado para su criterio de busqueda. </td>";    
 }
 ?>
-<h2>ola</h2>
 <div class="offset-8 col-md-4  "style="z-index: 100;  margin: 0% 65%; position: absolute;background: #333333;">
     <form method="post" class="">
      <table class="table-responsive-lg table table-dark table-hover " >
