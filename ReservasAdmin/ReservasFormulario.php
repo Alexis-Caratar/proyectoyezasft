@@ -314,7 +314,7 @@ $iden=$cliente->getIdentificacion();
 	function modificar(codigoProducto) {
 
 		var cadena = buscarProducto(codigoProducto);
-		var ventana = window.open("ReservasAdmin/formularioDetalleOrden.php?accion=Modificar" + cadena, null, "toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbar=no, resizable=no, width=400, height=250, , top=100, left=400");
+		var ventana = window.open("ReservasAdmin/formularioDetalleOrden.php?" + cadena, null, "toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbar=no, resizable=no, width=400, height=250, , top=100, left=400");
 
 	}
 

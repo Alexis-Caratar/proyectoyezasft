@@ -46,8 +46,8 @@ if (isset($_POST['AFechas'])) {
 }
 
 
-;
-if ($_POST['nombre']!=null&isset($_POST['nombre']))  {
+
+if (isset($_POST['nombre'])&&$_POST['nombre']!="")  {
    $identificacion=$_POST['nombre'];
    $filtro= " idempleado LIKE '$identificacion%' and ";
 
@@ -294,6 +294,6 @@ window.onload = function(){
 muestra_oculta('contenido1');
 }
 
-    setTimeout("location.reload()", 7000);
+    //setTimeout("location.reload()", 7000);
     
     </script>
